@@ -57,7 +57,7 @@ class BatchScoreRequest(BaseModel):
 async def score_wallet(address: str) -> Envelope[WalletScore]:
     settings = get_settings()
     url = f"{settings.ml_service_url.rstrip('/')}/api/v1/scores/{address}"
-    
+
     try:
         async with httpx.AsyncClient(timeout=30.0) as client:
             response = await client.get(url)
@@ -68,17 +68,17 @@ async def score_wallet(address: str) -> Envelope[WalletScore]:
 
                 # --- Post the relayer to mint on-chain attestation ---
                 relayer_url = f"{settings.relayer_service_url.rstrip('/')}/api/v1/attestations/issue"
-                
-                # The relayer expects the riskLevel as uppercase (LOW, MEDIUM, HIGH)
+
+                # the relayer expects the riskLevel as uppercase (LOW, MEDIUM, HIGH)
                 risk_level_upper = validated_score.risk_level.upper()
 
                 relayer_payload = {
                     "targetWallet": validated_score.address,
                     "trustScore": validated_score.trust_score,
-                    "riskLevel": risk_level_upper
+                    "riskLevel": risk_level_upper,
                 }
 
-                try: 
+                try:
                     relayer_resp = await client.post(relayer_url, json=relayer_payload)
                     if relayer_resp.status_code == 200:
                         tx_hash = relayer_resp.json().get("txHash")
@@ -87,8 +87,6 @@ async def score_wallet(address: str) -> Envelope[WalletScore]:
                         logger.error("relayer_mint_failed", status=relayer_resp.status_code, error=relayer_resp.text)
                 except Exception as e:
                     logger.error("relayer_unreachable", url=relayer_url, error=str(e))
-                    # Continue gracefully; attestation is a nice-to-have, not blocking
-                    
 
                 return ok(validated_score)
             else:
@@ -98,9 +96,8 @@ async def score_wallet(address: str) -> Envelope[WalletScore]:
             "ml_service_unreachable_fallback",
             address=address,
             url=url,
-            error=repr(exc)
+            error=repr(exc),
         )
-        # Fallback response when ML service is offline
         fallback_data = WalletScore(
             address=address,
             trust_score=500,
@@ -135,7 +132,7 @@ async def score_wallet(address: str) -> Envelope[WalletScore]:
 async def score_batch(body: BatchScoreRequest) -> Envelope[list[WalletScore]]:
     settings = get_settings()
     url = f"{settings.ml_service_url.rstrip('/')}/api/v1/scores/batch"
-    
+
     try:
         async with httpx.AsyncClient(timeout=60.0) as client:
             response = await client.post(url, json={"addresses": body.addresses})
@@ -151,10 +148,9 @@ async def score_batch(body: BatchScoreRequest) -> Envelope[list[WalletScore]]:
             "ml_service_unreachable_fallback",
             addresses=body.addresses,
             url=url,
-            error=repr(exc)
+            error=repr(exc),
         )
 
-    # Return fallback for all requested addresses
     fallback_scores = [
         WalletScore(
             address=addr,
