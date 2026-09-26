@@ -1,15 +1,17 @@
-"""Reputation-scoring gateway endpoints.
-
-Forwards scoring requests to the standalone CredLayer ML microservice (models/),
-providing seamless API gateway routing and graceful fallback if the ML service is offline.
-"""
+"""Wallet reputation scoring endpoints."""
 from __future__ import annotations
+
+from datetime import datetime, UTC
+from typing import Literal
+from uuid import UUID
 
 import httpx
 import structlog
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field
+from sqlalchemy.ext.asyncio import AsyncSession
 
+from credlayer.api.deps import get_db_session
 from credlayer.api.envelope import Envelope, ok
 from credlayer.core.config import get_settings
 from credlayer.schemas.common import CamelModel
@@ -64,10 +66,10 @@ async def score_wallet(address: str) -> Envelope[WalletScore]:
                 data = body.get("data", body)
                 validated_score = WalletScore.model_validate(data)
 
-                # --- NEW: post the relayer to mint on-chain ---
-                relayer_url = "http://localhost:3001/api/v1/attestations/issue"
+                # --- Post the relayer to mint on-chain attestation ---
+                relayer_url = f"{settings.relayer_service_url.rstrip('/')}/api/v1/attestations/issue"
                 
-                # the relayer expects the riskLevel as upeercase (LOW, MEDIUM, HIGH)
+                # The relayer expects the riskLevel as uppercase (LOW, MEDIUM, HIGH)
                 risk_level_upper = validated_score.risk_level.upper()
 
                 relayer_payload = {
@@ -80,12 +82,12 @@ async def score_wallet(address: str) -> Envelope[WalletScore]:
                     relayer_resp = await client.post(relayer_url, json=relayer_payload)
                     if relayer_resp.status_code == 200:
                         tx_hash = relayer_resp.json().get("txHash")
-                        logger.info("attestation_minted", error=relayer_resp.text)
+                        logger.info("attestation_minted", tx_hash=tx_hash)
                     else:
-                        logger.error("relayer_mint_failed", error=relayer_resp.text)
+                        logger.error("relayer_mint_failed", status=relayer_resp.status_code, error=relayer_resp.text)
                 except Exception as e:
-                    logger.error("relayer_unreachable", error=str(e))
-                    # --------------
+                    logger.error("relayer_unreachable", url=relayer_url, error=str(e))
+                    # Continue gracefully; attestation is a nice-to-have, not blocking
                     
 
                 return ok(validated_score)
@@ -138,20 +140,22 @@ async def score_batch(body: BatchScoreRequest) -> Envelope[list[WalletScore]]:
         async with httpx.AsyncClient(timeout=60.0) as client:
             response = await client.post(url, json={"addresses": body.addresses})
             if response.status_code == 200:
-                res_json = response.json()
-                data_list = res_json.get("data", res_json)
-                return ok([WalletScore.model_validate(r) for r in data_list])
+                body_data = response.json()
+                data = body_data.get("data", body_data)
+                scores = [WalletScore.model_validate(item) for item in data]
+                return ok(scores)
             else:
-                logger.warning("ml_service_batch_non_200", status_code=response.status_code, text=response.text)
+                logger.warning("ml_service_non_200", status_code=response.status_code, text=response.text)
     except Exception as exc:
         logger.warning(
-            "ml_service_batch_unreachable_fallback",
+            "ml_service_unreachable_fallback",
+            addresses=body.addresses,
             url=url,
-            count=len(body.addresses),
             error=repr(exc)
         )
 
-    fallbacks = [
+    # Return fallback for all requested addresses
+    fallback_scores = [
         WalletScore(
             address=addr,
             trust_score=500,
@@ -160,8 +164,8 @@ async def score_batch(body: BatchScoreRequest) -> Envelope[list[WalletScore]]:
             confidence=0.0,
             fraud_probability=0.5,
             network="solana",
-            explanation="ML scoring service is currently unreachable. Fallback default score assigned.",
+            explanation="ML service unavailable; fallback score returned.",
         )
         for addr in body.addresses
     ]
-    return ok(fallbacks)
+    return ok(fallback_scores)

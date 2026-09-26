@@ -40,6 +40,9 @@ class Settings(BaseSettings):
     # Standalone ML microservice connection (explicit IPv4 loopback)
     ml_service_url: str = "http://127.0.0.1:8001"
 
+    # Solana attestation relayer service URL
+    relayer_service_url: str = "http://127.0.0.1:3001"
+
     # Reserved for a future Supabase-backed identity provider (see CLAUDE.md
     # "Blockchain / Solana layer" auth notes) - unused until then.
     supabase_url: str | None = None
