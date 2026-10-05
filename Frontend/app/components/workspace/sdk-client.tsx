@@ -230,7 +230,7 @@ export function TrustScoreLiveDemo() {
               type="button"
               onClick={runAttestation}
               disabled={isProcessing}
-              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90[...]
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary\/90"
             >
               {isProcessing && (
                 <LoaderCircle className="size-4 animate-spin" aria-hidden="true" />
@@ -268,7 +268,7 @@ export function TrustScoreLiveDemo() {
                     />
                   ) : (
                     <Circle
-                      className="size-4 text-muted-foreground/50"
+                      className="size-4 text-muted-foreground\/50"
                       aria-hidden="true"
                     />
                   )}
