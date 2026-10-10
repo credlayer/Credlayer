@@ -1,265 +1,162 @@
+<div align="center">
+
 # CredLayer
 
+**Trust, risk, and reputation infrastructure for Web3**
+
+*Trust the behavior. Verify the reputation. Secure the interaction.*
+
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Chain](https://img.shields.io/badge/chain-Solana-9945FF)
+![Status](https://img.shields.io/badge/status-in%20development-orange)
+
+</div>
+
 <p align="center">
-  <img src="credlayer-terminal-demo.svg" alt="CredLayer Terminal Demo" width="100%" />
+  <img src="credlayer-terminal-demo.svg" alt="CredLayer terminal demo" width="100%" />
 </p>
 
+---
 
-## Decentralized Reputation Infrastructure for Web3
+## Overview
 
-CredLayer is a **B2B Web3 trust, risk, and reputation infrastructure platform**.
+CredLayer is a B2B infrastructure platform that analyzes on-chain activity, wallet behavior, and transaction patterns to produce explainable reputation and risk assessments.
 
-The platform analyzes blockchain activity, wallet behavior, transaction patterns, and other behavioral signals to generate intelligent reputation and risk assessments.
-
-Instead of asking:
-
-> "Who is this wallet?"
-
-CredLayer helps applications ask:
+Instead of asking *"Who is this wallet?"*, CredLayer helps applications ask:
 
 > **"Can I trust this wallet, and what evidence supports that decision?"**
 
-CredLayer is designed to provide this intelligence to:
-
-- DeFi protocols
-- Lending platforms
-- Web3 applications
-- DAOs
-- Exchanges
-- Fintech applications
-- Blockchain infrastructure companies
-- AI-agent platforms
-- Developers building trust-aware applications
+**Built for:** DeFi protocols · lending platforms · DAOs · exchanges · fintech apps · AI-agent platforms · developers building trust-aware applications.
 
 ---
 
-# 🧩 The Problem
+## Table of contents
 
-Web3 is permissionless, but permissionless systems create a major trust problem.
+- [The problem](#the-problem)
+- [How it works](#how-it-works)
+- [Core features](#core-features)
+- [Architecture](#architecture)
+- [Developer platform](#developer-platform)
+- [AI agent trust](#ai-agent-trust)
+- [Tech stack](#tech-stack)
+- [Security model](#security-model)
+- [Project structure](#project-structure)
+- [Getting started](#getting-started)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
 
-A wallet address doesn't tell an application:
+---
+
+## The problem
+
+Web3 is permissionless, which creates a trust gap. A wallet address alone doesn't tell an application:
 
 - Whether the wallet behaves responsibly
 - Whether it has interacted with risky contracts
-- Whether its transaction behavior is suspicious
-- Whether it has a consistent on-chain history
+- Whether its transaction patterns are suspicious
+- Whether its on-chain history is consistent
 - Whether an AI agent should trust it
-- Whether a protocol should extend credit
-- Whether a user represents meaningful financial risk
+- Whether a protocol should extend credit to it
 
-Most applications still rely on limited signals such as:
+Most apps rely on a thin pipeline of transaction history and basic rules. CredLayer adds an intelligence layer on top.
+
+---
+
+## How it works
+
+```mermaid
+flowchart LR
+    A[On-chain activity] --> B[Behavioral analysis]
+    B --> C[Risk detection]
+    C --> D[AI engine]
+    D --> E[Reputation score]
+    E --> F[Verifiable trust signal]
+    F --> G[Application decision]
+```
+
+---
+
+## Core features
+
+### Wallet reputation
+Reputation intelligence derived from wallet behavior: transaction history, wallet age, activity frequency, contract interactions, asset activity, and behavioral consistency.
+
+### AI-powered risk analysis
+Pattern recognition that goes beyond rule-based systems to surface suspicious behavior, unusual transaction activity, risky interactions, anomalies, and potential fraud indicators.
+
+### Explainable reputation scoring
+Complex behavior is distilled into a simple score, backed by the signals that produced it.
 
 ```text
-Wallet Address
-      ↓
-Transaction History
-      ↓
-Basic Rules
-      ↓
-Decision
-
-CredLayer introduces an intelligence layer:
-
-On-Chain Activity
-        ↓
-Behavioral Analysis
-        ↓
-Risk Detection
-        ↓
-AI Intelligence
-        ↓
-Reputation Score
-        ↓
-Verifiable Trust Signal
-        ↓
-Application Decision
-
-
----
-
-💡 Our Solution
-
-CredLayer converts raw blockchain activity into a structured reputation layer.
-
-Core pipeline
-
-┌───────────────────────┐
-│   Blockchain Data     │
-│ Solana / Other Chains │
-└───────────┬───────────┘
-            ↓
-┌───────────────────────┐
-│   Wallet Analysis     │
-│ Transactions & Events │
-└───────────┬───────────┘
-            ↓
-┌───────────────────────┐
-│ Behavioral Analytics  │
-│ Risk & Activity       │
-└───────────┬───────────┘
-            ↓
-┌───────────────────────┐
-│      AI Engine        │
-│ Pattern Recognition   │
-└───────────┬───────────┘
-            ↓
-┌───────────────────────┐
-│ Reputation & Risk     │
-│       Score           │
-└───────────┬───────────┘
-            ↓
-┌───────────────────────┐
-│ Verifiable Trust Data │
-└───────────────────────┘
-
-
----
-
-🔐 Core Features
-
-1. Wallet Reputation
-
-Generate reputation intelligence from wallet behavior.
-
-Signals can include:
-
-Transaction history
-
-Wallet age
-
-Transaction frequency
-
-Contract interactions
-
-Asset activity
-
-Behavioral consistency
-
-Risk indicators
-
-Historical activity patterns
-
-
-
----
-
-2. AI-Powered Risk Analysis
-
-CredLayer uses AI to identify patterns that traditional rule-based systems can miss.
-
-The AI layer can help detect:
-
-Suspicious behavioral patterns
-
-Unusual transaction activity
-
-Risky interactions
-
-Behavioral anomalies
-
-Potential fraud indicators
-
-Reputation changes
-
-
-
----
-
-3. Reputation Scoring
-
-Convert complex behavioral data into a simple, interpretable reputation score.
-
-Example:
-
 CredLayer Reputation
-
 Score: 842 / 1000
 
-Trust Level
-██████████████████░░ 84%
-
-Risk Level
-████░░░░░░░░░░░░░░░░ 18%
-
-Behavior Consistency
-████████████████░░░░ 82%
+Trust level           ██████████████████░░  84%
+Risk level            ████░░░░░░░░░░░░░░░░  18%
+Behavior consistency  ████████████████░░░░  82%
+```
 
 The scoring system is designed to become portable across applications and ecosystems.
 
+---
+
+## Architecture
+
+CredLayer is infrastructure, not another analytics dashboard. Applications integrate it directly through APIs and SDKs.
+
+```mermaid
+flowchart TD
+    FE["Frontend<br/>Next.js · React · Tailwind"]
+    API["API layer<br/>FastAPI · REST · Auth"]
+    BC["Blockchain data layer<br/>Solana · Helius · Adapters"]
+    AI["AI engine<br/>Behavior and risk models"]
+    REP["Reputation engine<br/>Score · Risk · Evidence"]
+    DB[("Database and cache<br/>PostgreSQL · Redis")]
+
+    FE --> API
+    API --> BC
+    API --> AI
+    BC --> REP
+    AI --> REP
+    REP --> DB
+```
+
+**Where it plugs in**
+
+```mermaid
+flowchart LR
+    CL{{CredLayer}} --> D[DeFi apps]
+    CL --> A[AI agents]
+    CL --> F[Fintech]
+    CL --> O[DAOs and exchanges]
+    D & A & F & O --> T[Trust intelligence]
+```
+
+**Multi-chain direction.** CredLayer launches on Solana, with an adapter-based design for unified cross-chain reputation later.
+
+```mermaid
+flowchart LR
+    S[Solana] --> U[Unified reputation]
+    B[Chain B] -.-> U
+    C[Chain C] -.-> U
+```
 
 ---
 
-🌐 Web3 Trust Infrastructure
+## Developer platform
 
-CredLayer is not intended to be another standalone analytics dashboard.
+CredLayer is designed with developers as first-class users: integrate reputation intelligence without building your own blockchain analytics stack.
 
-The long-term goal is to provide infrastructure that other applications can integrate directly.
+**Planned capabilities:** Reputation API · Wallet analysis API · Risk analysis API · Developer dashboard · API keys · Usage monitoring · SDKs · Webhooks · Docs · Multi-chain adapters
 
-CredLayer
-                       │
-        ┌──────────────┼──────────────┐
-        ↓              ↓              ↓
-     DeFi Apps      AI Agents      Fintech
-        │              │              │
-        └──────────────┼──────────────┘
-                       ↓
-                Trust Intelligence
+### Example response
 
-Applications can use CredLayer to make better decisions around:
-
-Lending
-
-Access control
-
-User onboarding
-
-Risk assessment
-
-Transaction monitoring
-
-Agent-to-agent interactions
-
-Reputation-based permissions
-
-
-
----
-
-🧑‍💻 Developer Platform
-
-CredLayer is being designed with developers as a first-class user.
-
-Developers should be able to integrate reputation intelligence without needing to build their own blockchain analytics infrastructure.
-
-Developer capabilities
-
-Reputation API
-
-Wallet analysis API
-
-Risk analysis API
-
-Developer dashboard
-
-API keys
-
-Usage monitoring
-
-SDKs
-
-Webhooks
-
-Documentation
-
-Multi-chain adapters
-
-
-Example API concept
-
+```http
 GET /api/v1/reputation/{wallet}
+```
 
-Example response:
-
+```json
 {
   "wallet": "7xK...9LmP",
   "reputationScore": 842,
@@ -267,647 +164,260 @@ Example response:
   "confidence": 0.91,
   "network": "solana"
 }
+```
 
+### SDK usage (planned)
 
----
+**JavaScript / TypeScript**
 
-🤖 AI Agent Trust
-
-One of CredLayer's long-term opportunities is AI-agent reputation.
-
-As autonomous AI agents begin interacting with:
-
-wallets
-
-protocols
-
-smart contracts
-
-marketplaces
-
-financial systems
-
-other agents
-
-
-they will need reliable trust signals.
-
-CredLayer can provide an intelligence layer that helps agents answer:
-
-Who am I interacting with?
-        ↓
-What is their historical behavior?
-        ↓
-What is their reputation?
-        ↓
-What is their risk?
-        ↓
-Should I interact?
-
-
----
-
-⛓️ Blockchain Architecture
-
-CredLayer is initially focused on Solana, while the architecture is designed for future multi-chain expansion.
-
-Current focus
-
-Solana
-  │
-  ├── Wallet Activity
-  ├── Transactions
-  ├── Program Interactions
-  ├── Behavioral Signals
-  └── Reputation Intelligence
-
-Future architecture
-
-CredLayer
-                  │
-       ┌──────────┼──────────┐
-       ↓          ↓          ↓
-    Solana      Chain B    Chain C
-       │          │          │
-       └──────────┼──────────┘
-                  ↓
-          Unified Reputation
-
-
----
-
-🏗️ Architecture
-
-┌────────────────────────────────────────────┐
-│                  Frontend                  │
-│              Next.js / React               │
-└──────────────────────┬─────────────────────┘
-                       │
-                       ↓
-┌────────────────────────────────────────────┐
-│                    API                     │
-│          Node.js / Express / FastAPI       │
-└───────────────┬───────────────┬────────────┘
-                │               │
-                ↓               ↓
-       ┌────────────────┐ ┌───────────────┐
-       │ Blockchain     │ │ AI Engine     │
-       │ Data Layer     │ │ Risk Analysis │
-       └───────┬────────┘ └───────┬───────┘
-               │                  │
-               └────────┬─────────┘
-                        ↓
-              ┌────────────────────┐
-              │ Reputation Engine  │
-              └──────────┬─────────┘
-                         ↓
-              ┌────────────────────┐
-              │ Database / Cache   │
-              └────────────────────┘
-
-
----
-
-🛠️ Technology Stack
-
-Frontend
-
-Next.js
-
-React
-
-TypeScript
-
-Tailwind CSS
-
-Framer Motion
-
-
-Backend
-
-Node.js
-
-Express.js / FastAPI
-
-PostgreSQL
-
-Prisma
-
-Redis
-
-REST APIs
-
-
-AI
-
-Python
-
-Machine Learning / AI models
-
-Behavioral analysis
-
-Risk classification
-
-Reputation scoring
-
-
-Blockchain
-
-Solana
-
-Rust
-
-Solana Programs
-
-Helius / blockchain data providers
-
-Future multi-chain adapters
-
-
-Infrastructure
-
-Docker
-
-GitHub Actions
-
-Vercel
-
-Railway / cloud infrastructure
-
-Cloudflare
-
-
-
----
-
-🔌 Developer Integration
-
-CredLayer will provide multiple integration methods.
-
-JavaScript / TypeScript
-
+```ts
 const reputation = await credlayer.wallet.analyze({
   address: walletAddress,
-  chain: "solana"
+  chain: "solana",
 });
 
 console.log(reputation.score);
+```
 
-Python
+**Python**
 
+```python
 result = credlayer.wallet.analyze(
     address=wallet_address,
-    chain="solana"
+    chain="solana",
 )
 
 print(result["score"])
+```
 
-REST API
+**REST**
 
+```bash
 curl https://api.credlayer.xyz/v1/reputation/WALLET_ADDRESS
+```
 
-
----
-
-📊 Reputation Model
-
-CredLayer's reputation engine can combine multiple behavioral signals.
-
-Reputation
-                      │
-       ┌──────────────┼──────────────┐
-       ↓              ↓              ↓
- Transaction      Wallet          Risk
-  Behavior         History        Signals
-       │              │              │
-       └──────────────┼──────────────┘
-                      ↓
-                AI Analysis
-                      ↓
-              Reputation Score
-
-The model should remain explainable and provide supporting signals rather than producing an unexplained score.
-
+> The SDK and public API are on the roadmap and not yet released.
 
 ---
 
-👥 Target Customers
+## AI agent trust
 
-CredLayer is primarily a B2B infrastructure product.
+As autonomous agents start transacting with wallets, protocols, marketplaces, and each other, they need reliable trust signals. CredLayer gives agents a way to decide whether to interact:
 
-Target customers
-
-DeFi
-
-Lending protocols
-
-Borrowing platforms
-
-DEXs
-
-Credit protocols
-
-
-Web3
-
-Wallets
-
-DAOs
-
-Marketplaces
-
-Infrastructure providers
-
-Web3 applications
-
-
-AI
-
-Autonomous agents
-
-Agent marketplaces
-
-Agent infrastructure
-
-AI-to-AI transaction systems
-
-
-Fintech
-
-Digital financial platforms
-
-Blockchain-enabled fintech
-
-Credit infrastructure
-
-
+```mermaid
+flowchart LR
+    Q1[Who am I<br/>interacting with?] --> Q2[What is their<br/>history?]
+    Q2 --> Q3[What is their<br/>reputation and risk?]
+    Q3 --> Q4{Interact?}
+```
 
 ---
 
-👨‍💻 Team
+## Reputation model
 
-Core Engineering
+The engine combines multiple behavioral signal groups, then applies AI analysis to produce the final score. Scores stay explainable: every result comes with its supporting signals.
 
-Frontend Engineers
-
-Build the user interface and developer dashboard
-
-Integrate wallet connectivity
-
-Build analytics and visualization interfaces
-
-
-Backend Engineers
-
-Build APIs
-
-Database architecture
-
-Authentication
-
-Data pipelines
-
-Developer platform
-
-
-AI Engineers
-
-Behavioral analysis
-
-Risk models
-
-Reputation scoring
-
-AI inference infrastructure
-
-
-Blockchain / Solana Engineers
-
-Solana programs
-
-On-chain verification
-
-Blockchain integrations
-
-Developer tooling
-
-
-Product Designers
-
-Product experience
-
-Design system
-
-Developer experience
-
-Enterprise UX
-
-
-Community & Growth
-
-Developer adoption
-
-Partnerships
-
-Ecosystem growth
-
-Community
-
-
-
+| Signal group | Examples |
+|---|---|
+| Transaction behavior | Frequency, volume patterns, counterparties |
+| Wallet history | Age, consistency, asset activity |
+| Risk signals | Risky contracts, anomalies, fraud indicators |
 
 ---
 
-🗺️ Development Roadmap
+## Target customers
 
-Phase 1 — Foundation
-
-[x] Core product architecture
-
-[ ] Backend infrastructure
-
-[ ] Database architecture
-
-[ ] Frontend implementation
-
-[ ] Authentication
-
-[ ] Wallet integration
-
-
+| Segment | Examples |
+|---|---|
+| DeFi | Lending, borrowing, DEXs, credit protocols |
+| Web3 | Wallets, DAOs, marketplaces, infrastructure providers |
+| AI | Autonomous agents, agent marketplaces, AI-to-AI transactions |
+| Fintech | Digital financial platforms, blockchain-enabled fintech, credit infrastructure |
 
 ---
 
-Phase 2 — Reputation Engine
+## Tech stack
 
-[ ] Wallet data ingestion
-
-[ ] Behavioral analysis
-
-[ ] AI analysis engine
-
-[ ] Reputation scoring
-
-[ ] Risk classification
-
-[ ] Explainable reputation signals
-
-
+| Layer | Technologies |
+|---|---|
+| Frontend | Next.js, React, TypeScript, Tailwind CSS, Framer Motion |
+| Backend | Python, FastAPI, PostgreSQL (Supabase), Alembic, Redis |
+| AI | Python, ML models, behavioral analysis, risk classification |
+| Blockchain | Solana, Rust, Solana programs, Helius |
+| Infrastructure | Docker, GitHub Actions, Vercel, Railway, Cloudflare |
 
 ---
 
-Phase 3 — Solana Integration
+## Security model
 
-[ ] Solana data integration
+CredLayer is a **non-custodial** infrastructure layer. It never requires:
 
-[ ] Solana programs
+- ❌ Private keys
+- ❌ Seed phrases
+- ❌ Wallet custody
+- ❌ Unauthorized transactions
 
-[ ] On-chain verification
+It works from public wallet addresses and blockchain data only. Wallet signatures are requested solely when a feature genuinely needs proof of wallet ownership.
 
-[ ] Wallet analysis
+### Development principles
 
-[ ] Verifiable reputation records
-
-
-
----
-
-Phase 4 — Developer Platform
-
-[ ] Public API
-
-[ ] Developer dashboard
-
-[ ] API keys
-
-[ ] SDK
-
-[ ] Webhooks
-
-[ ] API usage analytics
-
-[ ] Developer documentation
-
-
+| Principle | Meaning |
+|---|---|
+| Security first | Assets and private keys are never exposed to CredLayer |
+| Explainable intelligence | Scores are backed by understandable signals |
+| Privacy | Only necessary information is processed |
+| Verifiability | Important reputation claims can be independently verified |
+| Developer first | Integration is simple, with no infrastructure rebuild |
+| Modular architecture | Blockchain, AI, reputation, and API layers extend independently |
 
 ---
 
-Phase 5 — Multi-Chain
+## Project structure
 
-[ ] Additional blockchain adapters
-
-[ ] Cross-chain reputation
-
-[ ] Portable reputation
-
-[ ] Unified trust layer
-
-
-
----
-
-🧪 Development Principles
-
-CredLayer is being built around several principles:
-
-Security First
-
-User assets and private keys should never be exposed to CredLayer.
-
-Explainable Intelligence
-
-Reputation scores should be supported by understandable behavioral signals.
-
-Privacy
-
-Only necessary information should be processed.
-
-Verifiability
-
-Important reputation claims should be capable of being independently verified.
-
-Developer First
-
-Integration should be simple enough that developers can add CredLayer without rebuilding their infrastructure.
-
-Modular Architecture
-
-Blockchain, AI, reputation, and API layers should remain independently extensible.
-
-
----
-
-🔒 Security Model
-
-CredLayer is designed as a non-custodial infrastructure layer.
-
-CredLayer should never require:
-
-❌ Private Keys
-❌ Seed Phrases
-❌ Wallet Custody
-❌ Unauthorized Transactions
-
-The system should primarily work with:
-
-Public Wallet Address
-        ↓
-Blockchain Data
-        ↓
-Behavior Analysis
-        ↓
-Risk / Reputation Intelligence
-
-Wallet signatures should only be requested when an application feature genuinely requires cryptographic proof of wallet ownership.
-
-
----
-
-📁 Project Structure
-
-A high-level structure:
-
+```text
 credlayer/
-│
-├── frontend/
-│   ├── app/
-│   ├── components/
-│   ├── lib/
-│   └── public/
-│
-├── backend/
-│   ├── src/
-│   ├── routes/
-│   ├── services/
-│   ├── models/
-│   └── middleware/
-│
-├── ai/
-│   ├── models/
-│   ├── pipelines/
-│   ├── analysis/
-│   └── scoring/
-│
-├── blockchain/
-│   ├── programs/
-│   ├── clients/
-│   └── integrations/
-│
-├── sdk/
-│   ├── javascript/
-│   └── python/
-│
+├── Frontend/          # Next.js app and developer dashboard
+├── Backend/           # FastAPI service, models, migrations
+├── ai/                # Models, pipelines, analysis, scoring
+├── blockchain/        # Solana programs, clients, SDK, integrations
+├── sdk/               # JavaScript and Python client SDKs
 └── docs/
-
-
----
-
-🌍 Vision
-
-CredLayer aims to become the trust infrastructure of Web3.
-
-As decentralized applications become more autonomous, applications need a reliable way to understand who — or what — they are interacting with.
-
-Our vision is a future where:
-
-Every Wallet
-     +
-Every Application
-     +
-Every AI Agent
-     ↓
-Can Understand Reputation
-     ↓
-Before Interacting
-
-CredLayer is building the infrastructure for a more trusted, intelligent, and secure decentralized ecosystem.
-
+```
 
 ---
 
-🚀 Why CredLayer?
-
-> Identity tells you who someone is.
-
-CredLayer helps you understand how they behave.
-
-
-
-That behavioral intelligence can become the foundation for better decisions across Web3.
-
-
----
-
-🚀 Getting Started
+## Getting started
 
 ### Prerequisites
 
-- **Node.js** 18+ (for Frontend and Blockchain SDK)
-- **Python** 3.12+ with [uv](https://docs.astral.sh/uv/) (for Backend)
-- **Supabase Account** (for PostgreSQL database)
+- **Node.js** 18+
+- **Python** 3.12+ with [uv](https://docs.astral.sh/uv/)
+- **Supabase** account (PostgreSQL)
 
-### Quick Setup
+### 1. Clone
 
-1. **Clone the Repository**
 ```bash
 git clone <repository-url>
 cd credlayer
 ```
 
-2. **Setup Backend with Supabase**
-   
-   Follow the detailed guide: [`Backend/SUPABASE_SETUP.md`](./Backend/SUPABASE_SETUP.md)
-   
-   Quick steps:
-   - Create a [Supabase](https://supabase.com) project
-   - Get your PostgreSQL connection string
-   - Configure `Backend/.env` with your credentials
-   - Run migrations: `cd Backend && uv run alembic upgrade head`
-   - Start backend: `uv run uvicorn credlayer.main:app --port 8000 --reload`
+### 2. Backend
 
-3. **Setup Frontend**
+Create a [Supabase](https://supabase.com) project, then follow [`Backend/SUPABASE_SETUP.md`](./Backend/SUPABASE_SETUP.md) for the full guide. In short:
+
+```bash
+cd Backend
+# Add your PostgreSQL connection string to .env
+uv run alembic upgrade head
+uv run uvicorn credlayer.main:app --port 8000 --reload
+```
+
+### 3. Frontend
+
 ```bash
 cd Frontend
 npm install
-# Configure Frontend/.env.local with your settings
+# Configure .env.local
 npm run dev
 ```
 
-4. **Setup Blockchain SDK** (Optional)
+### 4. Blockchain SDK (optional)
+
 ```bash
 cd blockchain/sdk
 npm install
 npm run build
 ```
 
-### Testing Your Setup
+### Verify your setup
 
-- **Backend Health**: http://localhost:8000/health
-- **Frontend**: http://localhost:3000
-- **API Docs**: http://localhost:8000/docs
-
----
-
-🤝 Contributing
-
-We welcome developers, researchers, designers, and Web3 builders interested in trust infrastructure.
-
-Check the project issues and documentation before starting major changes.
-
+| Service | URL |
+|---|---|
+| Frontend | http://localhost:3000 |
+| Backend health | http://localhost:8000/health |
+| API docs | http://localhost:8000/docs |
 
 ---
 
-📄 License
+## Roadmap
 
-This project is licensed under the MIT License.
+| Phase | Focus | Status |
+|---|---|---|
+| 1. Foundation | Architecture, backend, database, frontend, auth, wallet integration | 🟡 In progress |
+| 2. Reputation engine | Data ingestion, behavioral analysis, AI engine, scoring, risk classification, explainable signals | ⚪ Planned |
+| 3. Solana integration | Data integration, Solana programs, on-chain verification, verifiable reputation records | ⚪ Planned |
+| 4. Developer platform | Public API, dashboard, API keys, SDKs, webhooks, usage analytics, docs | ⚪ Planned |
+| 5. Multi-chain | Additional adapters, cross-chain and portable reputation, unified trust layer | ⚪ Planned |
 
+<details>
+<summary>Detailed checklist</summary>
+
+**Phase 1: Foundation**
+- [x] Core product architecture
+- [ ] Backend infrastructure
+- [ ] Database architecture
+- [ ] Frontend implementation
+- [ ] Authentication
+- [ ] Wallet integration
+
+**Phase 2: Reputation engine**
+- [ ] Wallet data ingestion
+- [ ] Behavioral analysis
+- [ ] AI analysis engine
+- [ ] Reputation scoring
+- [ ] Risk classification
+- [ ] Explainable reputation signals
+
+**Phase 3: Solana integration**
+- [ ] Solana data integration
+- [ ] Solana programs
+- [ ] On-chain verification
+- [ ] Wallet analysis
+- [ ] Verifiable reputation records
+
+**Phase 4: Developer platform**
+- [ ] Public API
+- [ ] Developer dashboard
+- [ ] API keys
+- [ ] SDK
+- [ ] Webhooks
+- [ ] API usage analytics
+- [ ] Developer documentation
+
+**Phase 5: Multi-chain**
+- [ ] Additional blockchain adapters
+- [ ] Cross-chain reputation
+- [ ] Portable reputation
+- [ ] Unified trust layer
+
+</details>
 
 ---
 
-<div align="center">CredLayer
+## Vision
 
-Trust the behavior. Verify the reputation. Secure the interaction.
+Identity tells you *who* someone is. CredLayer helps you understand *how they behave*.
 
-Built for a more trustworthy Web3.
+As decentralized applications become more autonomous, every wallet, application, and AI agent should be able to understand reputation before interacting. CredLayer is building that trust infrastructure.
+
+---
+
+## Contributing
+
+We welcome developers, researchers, designers, and Web3 builders interested in trust infrastructure. Please check the project issues and documentation before starting major changes.
+
+**Areas we need help with:** frontend and dashboard · backend and APIs · AI and risk models · Solana programs · design and developer experience · community and growth.
+
+---
+
+## License
+
+Released under the [MIT License](./LICENSE).
+
+---
+
+<div align="center">
+
+**CredLayer**: built for a more trustworthy Web3.
 
 </div>
