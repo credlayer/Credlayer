@@ -1,188 +1,95 @@
-<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+<svg width="720" height="340" viewBox="0 0 720 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CredLayer terminal demo: analyzing a Solana wallet and returning a reputation score of 842 out of 1000" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYToxYjEyMTIxNy1mNjIyLTQxMjUtYjhhMy1kOTA1YTgzYWQzYjcAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaKhq9STKI7MQOC4OMixxNN4AAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDphOTc4MGI3Yy01ZjUyLTQ3Y2QtOTVjOC1jYTA3YTY5ZWI3ZGNscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoQ9fe8JGK6ZLNCwukppVUOgAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFgg8lAKN397krQKcO1hgsEg9rBbFmAqp7ra4eBiyCH/7ZSkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaLkAOSzrIsDPl+ivdYvMPU0AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIHo/EYvhzZ4ED4lTnR8uvQQGsNCnsO1yIc5bEs7CvrN0ZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GQEVZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjFiMTIxMjE3LWY2MjItNDEyNS1iOGEzLWQ5MDVhODNhZDNiNy9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjAzMzgzNmJlLTc2MGEtNGZkOS05ZDkwLTNmM2E0YmMwOGNjMHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCDyUAo3f3uStApw7WGCwSD2sFsWYCqnutrh4GLIIf/tlKJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFgg3Rw6A16Tqympgtnr3aLINXTGuO44CotLLRM11D3FgbaiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFgg+zLXHd1inAMsilm2dyhSI8x6rusLAqu6MnrdVfFxEsd0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQCoIUJK60+RzsVmyN31SOQk8/lR4pZfYWQKzJDSQo/R4lSwGuFrB9vKEq3lrtlNoXFipxx9fKC+YFithl9wTw5c=</c2pa:manifest></metadata>
   <style>
-    @keyframes blink {
-      0%, 49% { opacity: 1; }
-      50%, 100% { opacity: 0; }
-    }
-    
-    @keyframes typeWriter {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes slideIn {
-      from { transform: translateX(-10px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    
-    @keyframes progressBar {
-      0% { width: 0; }
-      100% { width: 680px; }
-    }
-    
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    
-    .terminal-bg {
-      fill: #0d1117;
-    }
-    
-    .terminal-header {
-      fill: #161b22;
-    }
-    
-    .terminal-text {
-      fill: #c9d1d9;
-      font-family: 'Courier New', monospace;
-      font-size: 14px;
-      white-space: pre;
-    }
-    
-    .prompt {
-      fill: #58a6ff;
-      font-weight: bold;
-    }
-    
-    .success {
-      fill: #3fb950;
-    }
-    
-    .warning {
-      fill: #d29922;
-    }
-    
-    .highlight {
-      fill: #79c0ff;
-    }
-    
-    .cursor {
-      fill: #58a6ff;
-      animation: blink 1s infinite;
-    }
-    
-    /* Typing effect for command */
-    .cmd-wrap { 
-      overflow: hidden;
-      white-space: nowrap;
-    }
-    .cmd-text {
-      animation: typeWriter 2s steps(35) 0.5s both;
-    }
-    
-    /* Sequential appearance with delays */
-    .line1 { animation: fadeIn 0.3s ease-in 2.8s both; }
-    .line2 { animation: fadeIn 0.5s ease-in 3.2s both; }
-    .line3 { animation: fadeIn 0.3s ease-in 3.8s both; }
-    
-    /* Progress bar */
-    .progress-bg { animation: fadeIn 0.3s ease-in 4.2s both; }
-    .progress-fill { animation: progressBar 3s ease-out 4.5s both; }
-    
-    /* System checks appear one by one */
-    .check1 { animation: slideIn 0.5s ease-out 5s both; }
-    .check2 { animation: slideIn 0.5s ease-out 5.6s both; }
-    .check3 { animation: slideIn 0.5s ease-out 6.2s both; }
-    .check4 { animation: slideIn 0.5s ease-out 6.8s both; }
-    .check5 { animation: slideIn 0.5s ease-out 7.4s both; }
-    
-    /* Separator and report */
-    .separator1 { animation: fadeIn 0.4s ease-in 8s both; }
-    .report-title { animation: fadeIn 0.5s ease-in 8.5s both; }
-    .report-line1 { animation: fadeIn 0.4s ease-in 9s both; }
-    .report-line2 { animation: fadeIn 0.4s ease-in 9.5s both; }
-    
-    /* Score bar */
-    .score-bg { animation: fadeIn 0.3s ease-in 10s both; }
-    .score-fill { animation: progressBar 2s ease-out 10.3s both; }
-    
-    /* Metrics appear one by one */
-    .metric1 { animation: slideIn 0.4s ease-out 11s both; }
-    .metric2 { animation: slideIn 0.4s ease-out 11.5s both; }
-    .metric3 { animation: slideIn 0.4s ease-out 12s both; }
-    .metric4 { animation: slideIn 0.4s ease-out 12.5s both; }
-    
-    /* Final status */
-    .separator2 { animation: fadeIn 0.4s ease-in 13s both; }
-    .status-line { animation: slideIn 0.5s ease-out 13.5s both; }
-    .tagline { animation: fadeIn 1s ease-in 14s both, pulse 3s ease-in-out 15s infinite; }
+    text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; font-size: 13px; fill: #c9d1d9; }
+    .muted { fill: #6e7681; }
+    .green { fill: #3fb950; }
+    .blue  { fill: #58a6ff; }
+    .big   { font-size: 38px; font-weight: 700; }
+    .tag   { font-size: 11px; letter-spacing: 1.5px; }
+
+    @keyframes type  { from { width: 0; } to { width: 270px; } }
+    @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+    @keyframes rise  { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fill  { from { width: 0; } to { width: 252px; } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+
+    .typing { animation: type 1.6s steps(31) .4s both; }
+    .cursor { animation: blink 1s step-end infinite; }
+    .r { opacity: 0; animation: rise .4s ease-out forwards; }
+    .d1 { animation-delay: 2.4s; }
+    .d2 { animation-delay: 3.0s; }
+    .d3 { animation-delay: 3.6s; }
+    .d4 { animation-delay: 4.3s; }
+    .d5 { animation-delay: 4.6s; }
+    .d6 { animation-delay: 5.3s; }
+    .d7 { animation-delay: 5.6s; }
+    .d8 { animation-delay: 5.9s; }
+    .d9 { animation-delay: 6.6s; }
+    .bar { animation: fill 1.2s ease-out 4.8s both; }
+    .dot { animation: pulse 2s ease-in-out 7s infinite; }
   </style>
-  
-  <!-- Terminal Window Background -->
-  <rect class="terminal-bg" width="800" height="600" rx="8"/>
-  
-  <!-- Terminal Header -->
-  <rect class="terminal-header" width="800" height="35" rx="8"/>
-  <circle cx="20" cy="17.5" r="6" fill="#ff5f57"/>
-  <circle cx="40" cy="17.5" r="6" fill="#febc2e"/>
-  <circle cx="60" cy="17.5" r="6" fill="#28c840"/>
-  <text x="400" y="23" class="terminal-text" text-anchor="middle" font-size="12">credlayer@mainnet ~ %</text>
-  
-  <!-- Terminal Content -->
-  <g transform="translate(20, 60)">
-    <!-- Command Prompt with typing effect -->
-    <text y="20" class="prompt">$</text>
-    <g class="cmd-wrap">
-      <text x="20" y="20" class="terminal-text cmd-text">credlayer init --analyze-wallet</text>
-    </g>
-    <rect x="295" y="8" width="10" height="16" class="cursor" style="animation-delay: 2.5s"/>
-    
-    <!-- Blank line -->
-    <text y="50" class="terminal-text line1"> </text>
-    
-    <!-- Initialization message -->
-    <text y="75" class="warning line2">⚡ Initializing CredLayer Intelligence Layer...</text>
-    
-    <!-- Progress bar container -->
-    <rect x="40" y="95" width="680" height="20" fill="#21262d" rx="3" class="progress-bg"/>
-    <rect x="40" y="95" width="0" height="20" fill="#58a6ff" rx="3" class="progress-fill"/>
-    <text x="380" y="110" class="terminal-text line3" text-anchor="middle" font-size="12">████████████████████████████████████ 100%</text>
-    
-    <!-- System checks -->
-    <text y="145" class="success check1">✓ Blockchain RPC Connection      → SYNCED    <tspan class="highlight">(Solana Mainnet-Beta)</tspan></text>
-    
-    <text y="170" class="success check2">✓ Wallet Behavior Analysis       → ACTIVE    <tspan class="highlight">(ML Model v2.1)</tspan></text>
-    
-    <text y="195" class="success check3">✓ On-Chain Pattern Recognition   → RUNNING   <tspan class="highlight">(3.2M wallets)</tspan></text>
-    
-    <text y="220" class="success check4">✓ Risk Detection Engine          → ONLINE    <tspan class="highlight">(Real-time)</tspan></text>
-    
-    <text y="245" class="success check5">✓ AI Reputation Scoring          → DEPLOYED  <tspan class="highlight">(Neural scoring)</tspan></text>
-    
-    <!-- Separator -->
-    <line x1="0" y1="265" x2="760" y2="265" stroke="#30363d" stroke-width="1" class="separator1"/>
-    
-    <!-- Analysis Results -->
-    <text y="295" class="warning report-title">📊 WALLET INTELLIGENCE REPORT</text>
-    
-    <text y="325" class="terminal-text report-line1">  Address: <tspan class="highlight">7xKXt...4kL9p</tspan>  Network: <tspan class="highlight">Solana</tspan></text>
-    
-    <!-- Score visualization -->
-    <text y="355" class="terminal-text report-line2">  Reputation Score: <tspan class="success" font-weight="bold" font-size="18">842/1000</tspan> <tspan class="success">⭐ EXCELLENT</tspan></text>
-    
-    <!-- Score bar -->
-    <rect x="40" y="370" width="400" height="15" fill="#21262d" rx="3" class="score-bg"/>
-    <rect x="40" y="370" width="0" height="15" fill="#3fb950" rx="3" class="score-fill" style="width: 337px"/>
-    
-    <!-- Metrics -->
-    <text y="410" class="terminal-text metric1">  📈 Risk Assessment:  <tspan class="success">🟢 LOW RISK</tspan></text>
-    
-    <text y="435" class="terminal-text metric2">  🔍 Confidence:       <tspan class="highlight">91% (High Certainty)</tspan></text>
-    
-    <text y="460" class="terminal-text metric3">  ⚡ Analysis Speed:    <tspan class="highlight">1.2s</tspan></text>
-    
-    <text y="485" class="terminal-text metric4">  🎯 Data Points:      <tspan class="highlight">847 signals processed</tspan></text>
-    
-    <!-- Status footer -->
-    <line x1="0" y1="505" x2="760" y2="505" stroke="#30363d" stroke-width="1" class="separator2"/>
-    
-    <text y="530" class="success status-line">🌐 CredLayer Intelligence Layer: STATUS → ONLINE</text>
-    <text y="555" class="terminal-text tagline" font-style="italic">"Not just blockchain data. Blockchain intelligence."</text>
+
+  <defs>
+    <clipPath id="clip"><rect x="44" y="48" height="26" class="typing"/></clipPath>
+  </defs>
+
+  <rect x="0.5" y="0.5" width="719" height="339" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <path d="M1 10.5A9.5 9.5 0 0 1 10.5 1H709.5A9.5 9.5 0 0 1 719 10.5V34H1Z" fill="#161b22"/>
+  <line x1="1" y1="34.5" x2="719" y2="34.5" stroke="#30363d"/>
+  <circle cx="20" cy="18" r="5.5" fill="#ff5f57"/>
+  <circle cx="38" cy="18" r="5.5" fill="#febc2e"/>
+  <circle cx="56" cy="18" r="5.5" fill="#28c840"/>
+  <text x="360" y="22" text-anchor="middle" class="muted" style="font-size:12px">credlayer</text>
+
+  <text x="24" y="66" class="blue" style="font-weight:700">$</text>
+  <g clip-path="url(#clip)">
+    <text x="44" y="66">credlayer analyze 7xKXt...4kL9p</text>
+  </g>
+  <rect x="288" y="53" width="8" height="16" fill="#58a6ff" class="cursor"/>
+
+  <g class="r d1">
+    <polyline points="26,96 30,100 37,92" fill="none" stroke="#3fb950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="48" y="100">Fetching on-chain activity</text>
+    <text x="696" y="100" text-anchor="end" class="muted">Solana</text>
+  </g>
+  <g class="r d2">
+    <polyline points="26,120 30,124 37,116" fill="none" stroke="#3fb950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="48" y="124">Analyzing behavior patterns</text>
+    <text x="696" y="124" text-anchor="end" class="muted">847 signals</text>
+  </g>
+  <g class="r d3">
+    <polyline points="26,144 30,148 37,140" fill="none" stroke="#3fb950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="48" y="148">Running risk detection</text>
+    <text x="696" y="148" text-anchor="end" class="muted">1.2s</text>
+  </g>
+
+  <line x1="24" y1="170" x2="696" y2="170" stroke="#21262d" class="r d4"/>
+
+  <g class="r d5">
+    <text x="24" y="196" class="muted tag">REPUTATION SCORE</text>
+    <text x="24" y="238" class="big green">842</text>
+    <text x="100" y="238" class="muted" style="font-size:16px">/ 1000</text>
+  </g>
+  <rect x="24" y="256" width="252" height="6" rx="3" fill="#21262d"/>
+  <rect x="24" y="256" height="6" rx="3" fill="#3fb950" class="bar"/>
+
+  <g class="r d6">
+    <text x="400" y="214" class="muted">Risk</text>
+    <text x="520" y="214" class="green" style="font-weight:700">LOW</text>
+  </g>
+  <g class="r d7">
+    <text x="400" y="238" class="muted">Confidence</text>
+    <text x="520" y="238" class="blue">91%</text>
+  </g>
+  <g class="r d8">
+    <text x="400" y="262" class="muted">Network</text>
+    <text x="520" y="262" class="blue">solana</text>
+  </g>
+
+  <g class="r d9">
+    <line x1="24" y1="288" x2="696" y2="288" stroke="#21262d"/>
+    <circle cx="30" cy="311" r="4" fill="#3fb950" class="dot"/>
+    <text x="44" y="315" class="green">online</text>
+    <text x="696" y="315" text-anchor="end" class="muted" style="font-style:italic">Trust the behavior. Verify the reputation.</text>
   </g>
 </svg>
