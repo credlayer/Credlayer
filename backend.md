@@ -38,5 +38,5 @@ The backend lacks any data processing scripts, background task queues (e.g., Cel
 ## Infrastructure & Configuration
 
 - **Dependency Management**: Standardized using `pyproject.toml` (with Hatchling as the build backend) and `uv` (`uv.lock`).
-- **Configuration**: Managed using `pydantic-settings` (`src/credlayer/core/config.py`). It defines environment variables for the database URL, Redis URL, CORS origins, and includes unused, future-proofing placeholders for Supabase.
+- **Configuration**: Managed using `pydantic-settings` (`src/credlayer/core/config.py`). It defines environment variables for the database URL, Redis URL, CORS origins, and the JWT auth settings (`JWT_SECRET`, `JWT_EXPIRE_MINUTES`, `ADMIN_EMAILS`).
 - **Logging**: Configured via `structlog` (`src/credlayer/core/logging.py`) for structured JSON logging, as seen in the `/readyz` health check when dependencies fail to connect.

@@ -17,46 +17,13 @@ uv sync
 
 ### Database Setup
 
-#### Option A: Supabase PostgreSQL (Recommended)
+#### Option A: Railway PostgreSQL (production)
 
-1. **Create a Supabase project** at [supabase.com](https://supabase.com)
+Set `DATABASE_URL` to the value Railway provides (reference it from the API service as `${{Postgres.DATABASE_URL}}`). `postgresql://` URLs are converted to the asyncpg driver automatically. Migrations create the whole schema on a fresh database:
 
-2. **Get your connection details:**
-   - Go to Project Settings → Database
-   - Copy the **Direct Connection** string (port 5432, NOT the pooler)
-   - Important: Use direct connection for Railway/long-running containers
-
-3. **Run the setup SQL:**
-   - Open Supabase SQL Editor
-   - Copy entire `Backend/supabase_setup.sql` file
-   - Paste and run in SQL Editor
-   - This creates all 10 tables with correct schema
-
-4. **Configure `.env`:**
-   ```bash
-   cp .env.example .env
-   ```
-   
-   Update `DATABASE_URL` in `.env`:
-   ```env
-   # Use Direct Connection (port 5432) for Railway/containers
-   DATABASE_URL=postgresql+asyncpg://postgres:YOUR_PASSWORD@db.xxx.supabase.co:5432/postgres
-   ```
-
-5. **Verify setup:**
-   ```bash
-   # Run migrations (should show "already at head" since tables exist)
-   uv run alembic upgrade head
-   
-   # Or check schema
-   python scripts/check_migrations.py
-   ```
-
-**Important Notes:**
-- ✅ **Direct connection (port 5432)** - for Railway, Docker, local dev
-- ❌ **Transaction pooler (port 6543)** - only for serverless functions
-- The `supabase_setup.sql` includes all tables from migrations 001-007
-- After initial setup, migrations run automatically on Railway deploys
+```bash
+uv run alembic upgrade head
+```
 
 #### Option B: Local PostgreSQL with Docker
 ```bash
@@ -213,16 +180,13 @@ If you see "column does not exist" errors:
    python scripts/check_migrations.py
    ```
 
-2. **Verify Supabase tables:**
-   - Run `scripts/verify_schema.sql` in Supabase SQL Editor
-   - Or check in Supabase Table Editor
+2. **Check the applied revision:** `uv run alembic current`
 
 3. **Reset if needed (destroys data):**
    ```bash
    # Local only
    ./scripts/reset_and_migrate.sh
-   
-   # Supabase: run scripts/railway_reset_db.sql in SQL Editor
+
    ```
 
 ---
@@ -234,25 +198,18 @@ If you see "column does not exist" errors:
 1. **Connect GitHub repo** to Railway
 2. **Set environment variables:**
    ```env
-   DATABASE_URL=postgresql+asyncpg://postgres:password@db.xxx.supabase.co:5432/postgres
+   DATABASE_URL=${{Postgres.DATABASE_URL}}
+   JWT_SECRET=<openssl rand -hex 32>
+   ADMIN_EMAILS=you@example.com
    ENVIRONMENT=production
    CORS_ORIGINS=["https://your-frontend.vercel.app"]
    ```
 3. **Deploy** - migrations run automatically via Dockerfile
 
-### Important: Use Direct Connection
-
-Railway deployments MUST use Supabase **Direct Connection** (port 5432):
-- ✅ `db.xxx.supabase.co:5432` - Direct connection
-- ❌ `aws-x-xx.pooler.supabase.com:6543` - Transaction pooler (don't use)
-
-The transaction pooler is only for serverless functions, not containers.
-
 ### Deployment Troubleshooting
 
 See detailed guides:
 - `RAILWAY_SETUP.md` - Complete Railway deployment guide
-- `SUPABASE_RESET_GUIDE.md` - Fix schema issues
 - `QUICK_FIX.md` - Common error solutions
 
 ---
@@ -310,7 +267,6 @@ Backend/
 ├── docker-compose.yml   # Local services
 ├── Dockerfile           # Production container
 ├── pyproject.toml       # Python dependencies
-├── supabase_setup.sql   # Complete database setup
 └── README.md            # This file
 ```
 
@@ -357,9 +313,10 @@ API_V1_PREFIX=/api/v1
 LOG_LEVEL=INFO
 CORS_ORIGINS=["http://localhost:3000"]
 
-# Supabase (for future auth integration)
-SUPABASE_URL=https://xxx.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=xxx
+# Auth
+JWT_SECRET=<openssl rand -hex 32>
+JWT_EXPIRE_MINUTES=1440
+ADMIN_EMAILS=you@example.com
 ```
 
 ---
@@ -377,21 +334,19 @@ PYTHONPATH=src python3 -m unittest discover -s tests -p "test_*.py"
 ## 12. Helpful Resources
 
 - **Deployment:** `RAILWAY_SETUP.md`
-- **Database Issues:** `SUPABASE_RESET_GUIDE.md`
 - **Quick Fixes:** `QUICK_FIX.md`
 - **Scripts:** `scripts/README.md`
 - **API Spec:** `docs/backend-ai-specification.md`
-- **Supabase Setup:** Run `supabase_setup.sql` in SQL Editor
 
 ---
 
 ## 13. Common Issues
 
 ### "Column does not exist" errors
-Schema mismatch. See `SUPABASE_RESET_GUIDE.md` or run `scripts/check_migrations.py`.
+Schema mismatch. Run `alembic upgrade head` or `scripts/check_migrations.py`.
 
-### "Network is unreachable" on Railway
-Check DATABASE_URL uses direct connection (port 5432, not 6543).
+### Database connection errors on Railway
+Check `DATABASE_URL` references the Railway Postgres service (private network host).
 
 ### Redis connection errors
 Redis is optional. Set `REDIS_URL` or leave empty - app will work without it.
@@ -402,3 +357,20 @@ Use direct connection, not transaction pooler. Or add `?prepared_statement_cache
 ---
 
 **Need Help?** Check the documentation files in `Backend/` or run diagnostic scripts in `Backend/scripts/`.
+
+---
+
+## 14. Authentication
+
+Email + password auth lives in `src/credlayer/api/v1/auth.py` (Argon2 hashing, HS256 JWT bearer tokens, `users` table from migration 008).
+
+| Endpoint | Purpose |
+|---|---|
+| `POST /api/v1/auth/register` | Create account, returns token |
+| `POST /api/v1/auth/login` | Email + password, returns token |
+| `POST /api/v1/auth/logout` | Revokes all of the user's tokens |
+| `GET /api/v1/auth/me` | Current user (protected) |
+| `POST /api/v1/auth/forgot-password`, `/reset-password` | Password reset |
+| `GET /api/v1/auth/admin/users` | Admin-only example |
+
+Protect a route with `Depends(get_current_user)` or `Depends(require_roles("admin"))`.

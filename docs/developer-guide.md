@@ -206,7 +206,7 @@ Webhook registration metadata is supported at `/webhooks`. The current backend s
 ## Troubleshooting
 
 - `401` immediately after key creation: ensure the deployed API-key creation code hashes the actual secret, not a random unrelated value; regenerate keys after deploying the fix.
-- `relation request_logs does not exist`: create the table in Supabase or apply migration 007; do not blindly rerun migrations against a manually initialized schema.
+- `relation request_logs does not exist`: run `alembic upgrade head`.
 - Scoring is unavailable: check ML service readiness and the deployment-specific `ML_SERVICE_URL`. No score is returned unless the configured service produces a valid model result.
 - `404` on `/request-logs/stats/...`: deploy the request-log stats route and register its router in `api/router.py`.
 - API key appears to work after revocation: deploy the authentication middleware and verify that the request includes the same secret; revocation is enforced server-side, not by the frontend list refresh.

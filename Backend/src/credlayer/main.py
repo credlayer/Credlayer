@@ -34,7 +34,12 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
 
     def _is_excluded(self, request: Request) -> bool:
         path = request.url.path.rstrip("/") or "/"
-        return path in self._excluded_paths or path.startswith(("/static/", "/assets/"))
+        # /auth routes carry user JWTs in the Bearer header, not API keys.
+        return (
+            path in self._excluded_paths
+            or path.startswith(("/static/", "/assets/"))
+            or "/auth/" in f"{path}/"
+        )
 
     @staticmethod
     def _presented_key(request: Request) -> str | None:

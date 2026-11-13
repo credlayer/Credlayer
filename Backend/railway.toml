@@ -3,6 +3,8 @@ builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile"
 
 [deploy]
+healthcheckPath = "/healthz"
+healthcheckTimeout = 60
 restartPolicyType = "on-failure"
 restartPolicyMaxRetries = 10
-startCommand = "/app/.venv/bin/uvicorn credlayer.main:app --host 0.0.0.0 --port $PORT"
+startCommand = "alembic upgrade head && uvicorn credlayer.main:app --host 0.0.0.0 --port $PORT"
