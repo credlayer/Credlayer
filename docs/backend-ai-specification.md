@@ -16,7 +16,7 @@ CredLayer is a decentralized reputation protocol that analyzes on-chain wallet a
 The initial engineering effort should produce:
 
 1. A production-ready backend service (FastAPI) backed by PostgreSQL and Redis
-2. Supabase-based authentication and session management
+2. FastAPI-based authentication (Argon2 + JWT) and session management
 3. A multi-chain wallet indexing pipeline covering Solana and EVM-compatible chains
 4. An AI reputation engine that produces explainable, auditable trust scores
 5. A developer platform: API keys, SDKs, usage analytics, and webhooks
@@ -33,7 +33,7 @@ CredLayer follows a layered service architecture: a chain-indexing layer ingests
 2. **Data layer** — PostgreSQL stores structured wallet, score, and organization data; Redis handles caching, rate limiting, and job queues
 3. **Reputation engine** — LangChain/LangGraph orchestrates scoring pipelines; OpenAI API generates natural-language explanations of each score
 4. **API layer** — FastAPI exposes authenticated REST endpoints consumed by the dashboard, SDKs, and third-party developers
-5. **Auth layer** — Supabase Auth manages user, organization, and API-key identity
+5. **Auth layer** — FastAPI auth (`/api/v1/auth`) manages user, organization, and API-key identity
 
 ## 4. Core Technology Stack
 
@@ -42,7 +42,7 @@ CredLayer follows a layered service architecture: a chain-indexing layer ingests
 | API framework | FastAPI (Python) |
 | Database | PostgreSQL |
 | Cache / queue | Redis |
-| Auth | Supabase Auth |
+| Auth | FastAPI (Argon2 + JWT) |
 | ORM / migrations | SQLAlchemy, Alembic |
 | Infrastructure | Docker |
 | AI orchestration | LangChain / LangGraph |
@@ -54,7 +54,7 @@ CredLayer follows a layered service architecture: a chain-indexing layer ingests
 ## 5. Core Modules
 
 ### 5.1 Authentication
-User, organization, and API-key authentication via Supabase Auth, including session management and role-based access control.
+User, organization, and API-key authentication via FastAPI, including session management and role-based access control.
 
 ### 5.2 Wallets
 Wallet registration, metadata storage, and activity history across supported chains.
@@ -134,7 +134,7 @@ CredLayer exposes reputation data to external developers, protocols, and AI agen
 
 ### Phase 1 — Foundation
 1. Core API scaffolding (FastAPI, PostgreSQL, Redis, Alembic)
-2. Supabase Auth integration
+2. FastAPI auth integration
 3. Solana wallet indexing via Helius
 
 ### Phase 2 — Reputation Engine v1

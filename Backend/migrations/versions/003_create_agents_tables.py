@@ -53,13 +53,11 @@ def upgrade() -> None:
         sa.Column('created_at', sa.DateTime(timezone=True), nullable=False, server_default=sa.text('now()')),
         sa.PrimaryKeyConstraint('id', name=op.f('pk_agent_activity'))
     )
-    op.create_index(op.f('ix_agent_activity_agent_id'), 'agent_activity', ['agent_id'], unique=False)
     op.create_index(op.f('ix_agent_activity_created_at'), 'agent_activity', ['created_at'], unique=False)
 
 
 def downgrade() -> None:
     op.drop_index(op.f('ix_agent_activity_created_at'), table_name='agent_activity')
-    op.drop_index(op.f('ix_agent_activity_agent_id'), table_name='agent_activity')
     op.drop_table('agent_activity')
     
     op.drop_index(op.f('ix_owner_wallet'), table_name='agents')

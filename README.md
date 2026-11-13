@@ -242,7 +242,7 @@ The engine combines multiple behavioral signal groups, then applies AI analysis 
 | Layer | Technologies |
 |---|---|
 | Frontend | Next.js, React, TypeScript, Tailwind CSS, Framer Motion |
-| Backend | Python, FastAPI, PostgreSQL (Supabase), Alembic, Redis |
+| Backend | Python, FastAPI, PostgreSQL (Railway), Alembic, Redis |
 | AI | Python, ML models, behavioral analysis, risk classification |
 | Blockchain | Solana, Rust, Solana programs, Helius |
 | Infrastructure | Docker, GitHub Actions, Vercel, Railway, Cloudflare |
@@ -293,7 +293,7 @@ credlayer/
 
 - **Node.js** 18+
 - **Python** 3.12+ with [uv](https://docs.astral.sh/uv/)
-- **Supabase** account (PostgreSQL)
+- **PostgreSQL** (Railway, or local via Docker)
 
 ### 1. Clone
 
@@ -304,7 +304,7 @@ cd credlayer
 
 ### 2. Backend
 
-Create a [Supabase](https://supabase.com) project, then follow [`Backend/SUPABASE_SETUP.md`](./Backend/SUPABASE_SETUP.md) for the full guide. In short:
+Use a local PostgreSQL (`docker compose up -d` in `Backend/`) or a Railway PostgreSQL `DATABASE_URL`. See [`Backend/README.md`](./Backend/README.md). In short:
 
 ```bash
 cd Backend

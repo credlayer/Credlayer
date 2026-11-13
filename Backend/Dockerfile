@@ -33,5 +33,5 @@ USER credlayer
 
 EXPOSE 8000
 
-# Start server - skip migrations since Supabase schema was manually created
-CMD ["sh", "-c", "exec uvicorn credlayer.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Apply migrations (idempotent), then start the server
+CMD ["sh", "-c", "alembic upgrade head && exec uvicorn credlayer.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

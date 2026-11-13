@@ -16,9 +16,8 @@ print("ENVIRONMENT CONFIGURATION CHECK")
 print("=" * 60)
 print(f"Environment: {settings.environment}")
 print(f"Log Level: {settings.log_level}")
-print(f"Database URL: {settings.database_url}")
-print(f"Supabase URL: {settings.supabase_url}")
-print(f"Service Role Key: {settings.supabase_service_role_key[:20]}..." if settings.supabase_service_role_key else "Not set")
+print(f"Database URL: {settings.database_url.split('@')[-1]}")  # credentials hidden
+print(f"JWT secret set: {settings.jwt_secret != 'dev-insecure-change-me'}")
 print("=" * 60)
 
 if settings.database_url == "postgresql+asyncpg://credlayer:credlayer@localhost:5432/credlayer":
