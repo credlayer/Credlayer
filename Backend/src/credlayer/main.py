@@ -124,32 +124,43 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
             raise
         finally:
             try:
-                owner_wallet, api_key_id = await self._resolve_owner(request, api_key)
-                if owner_wallet:
-                    status_code = response.status_code if response is not None else 500
-                    asyncio.create_task(
-                        self._write_log(
-                            {
-                                "api_key_id": api_key_id,
-                                "owner_wallet": owner_wallet,
-                                "method": request.method,
-                                "endpoint": request.url.path,
-                                "status_code": status_code,
-                                "error_message": (
-                                    repr(exception)
-                                    if exception
-                                    else (f"HTTP {status_code}" if status_code >= 500 else None)
-                                ),
-                                "duration_ms": max(
-                                    0, round((time.perf_counter() - started) * 1000)
-                                ),
-                                "ip_address": (
-                                    request.headers.get("x-forwarded-for", "").split(",")[0].strip()
-                                    or (request.client.host if request.client else None)
-                                ),
-                            }
+                api_v1_prefix = get_settings().api_v1_prefix.rstrip("/")
+                portal_prefixes = (
+                    f"{api_v1_prefix}/developer",
+                    f"{api_v1_prefix}/request-logs",
+                    f"{api_v1_prefix}/api-keys",
+                )
+                is_portal_request = request.url.path.startswith(portal_prefixes)
+                # Only log presented API-key traffic; portal polling is not business usage.
+                if self._presented_key(request) is not None and not is_portal_request:
+                    owner_wallet, api_key_id = await self._resolve_owner(request, api_key)
+                    if owner_wallet:
+                        status_code = response.status_code if response is not None else 500
+                        asyncio.create_task(
+                            self._write_log(
+                                {
+                                    "api_key_id": api_key_id,
+                                    "owner_wallet": owner_wallet,
+                                    "method": request.method,
+                                    "endpoint": request.url.path,
+                                    "status_code": status_code,
+                                    "error_message": (
+                                        repr(exception)
+                                        if exception
+                                        else (f"HTTP {status_code}" if status_code >= 500 else None)
+                                    ),
+                                    "duration_ms": max(
+                                        0, round((time.perf_counter() - started) * 1000)
+                                    ),
+                                    "ip_address": (
+                                        request.headers.get("x-forwarded-for", "")
+                                        .split(",")[0]
+                                        .strip()
+                                        or (request.client.host if request.client else None)
+                                    ),
+                                }
+                            )
                         )
-                    )
             except Exception as exc:
                 logger.warning("request_log_prepare_failed", error=repr(exc))
 
