@@ -35,6 +35,17 @@ class Settings(BaseSettings):
         return [part.strip() for part in text.split(",") if part.strip()]
 
     database_url: str = "postgresql+asyncpg://credlayer:credlayer@localhost:5432/credlayer"
+
+    @field_validator("database_url", mode="after")
+    @classmethod
+    def _use_asyncpg_driver(cls, value: str) -> str:
+        # Railway/Supabase provide plain postgres:// or postgresql:// URLs,
+        # which SQLAlchemy maps to psycopg2. The app is async and uses asyncpg.
+        for prefix in ("postgres://", "postgresql://"):
+            if value.startswith(prefix):
+                return "postgresql+asyncpg://" + value[len(prefix):]
+        return value
+
     redis_url: str | None = None  # Optional: if not set, Redis features will be disabled
 
     # Must be configured to the deployed scoring service in each environment.
